@@ -11,8 +11,9 @@ context.lineTo(canvasSize, canvasSize);
 context.lineTo(0, canvasSize);
 context.lineTo(0, 0);
 context.lineJoin = 'round';
+context.strokeStyle = '#a5a5a5'
 
-context.lineWidth = 2;
+context.lineWidth = 3;
 context.stroke();
 
 
