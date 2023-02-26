@@ -3,16 +3,18 @@
     font-size: 22px;
 }
 
-.sudoku__container {
-    max-width: 362px;
+.container {
+    max-width: 360px;
     height: calc(100vh - 16px);
     margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.sudoku__field {
-    width: 362px;
+.field, .btn-list {
+    width: 360px;
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #b7b7b7;
@@ -20,7 +22,7 @@
     position: relative;
 }
 
-.sudoku__field::after {
+.field::after {
     content: '';
     position: absolute;
     width: 3px;
@@ -28,8 +30,10 @@
     background: #6b6b6b;
     top: 0;
     left: 33%;
+    pointer-events: none;
 }
-.sudoku__field::before {
+
+.field::before {
     content: '';
     position: absolute;
     width: 3px;
@@ -37,13 +41,15 @@
     background: #6b6b6b;
     top: 0;
     right: 33%;
+    pointer-events: none;
 }
 
-.sudoku__pat {
+.pattern {
     width: 100%;
+    pointer-events: none;
 }
 
-.sudoku__pat::after {
+.pattern::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -51,8 +57,10 @@
     background: #6b6b6b;
     top: 33%;
     left: 0;
+    pointer-events: none;
 }
-.sudoku__pat::before {
+
+.pattern::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -60,14 +68,21 @@
     background: #6b6b6b;
     top: 66%;
     left: 0;
+    pointer-events: none;
 }
 
-.sudoku__cell {
-    width: 40px;
+.cell, .btn {
+    width: calc(100% / 9);
     height: 40px;
     outline: 1px solid #a2a2a2;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
+    cursor: pointer;
+    background: #fff;
+}
+
+.cell.active {
+    background: #5877ec;
 }
