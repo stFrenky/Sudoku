@@ -2,6 +2,7 @@ const view = {
 	field: document.querySelector('.field'),
 	cellLIst: document.querySelectorAll('.cell'),
 	digits: document.querySelector('.btn-list'),
+	startBtn: document.querySelector('.new-game-btn'),
 	selectedCell: null,
 
 	toggleClassField(event) {
@@ -26,22 +27,24 @@ const view = {
 	init() {
 		this.field.addEventListener('click', this.toggleClassField.bind(this));
 		this.digits.addEventListener('click', this.changeValueField.bind(this));
-	}
+	},
 }
 
-view.init();
 
 const generation = {
 	pattern: '0681594327597283416342671589934157268278936145156842973729318654813465792465729831',
 	arr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 	rows: [],
 	row: null,
+	currPos: null,
+
+
 	randomizer() {
-		return Math.random() * this.arr.length
+		return Math.random() * this.arr.length;
 	},
 
 	getPart() {
-		return this.arr.splice((this.randomizer()), 1)
+		return this.arr.splice((this.randomizer()), 1);
 	},
 
 	getField() {
@@ -60,6 +63,8 @@ const generation = {
 
 			if (this.cellLIst[i - 1].textContent !== '') {
 				this.cellLIst[i - 1].classList.add('no-events');
+			} else {
+				this.cellLIst[i - 1].classList.remove('no-events');
 			}
 
 			if (i % 9 === 0) {
@@ -67,14 +72,66 @@ const generation = {
 				this.row === null;
 			}
 		}
+
+		// this.findEmpty();
+		// console.log(this.currPos)
+
 	},
 
-	checkField() {
+	// findEmpty() {
+	// 	for (let r = 0; r < 9; r++) {
+	// 		for (let c = 0; c < 9; c++) {
+	// 			if (this.rows[r][c] === '') {
+	// 				return this.currPos = [r, c];
+	// 			}
+
+	// 			this.currPos = null;
+	// 		}
+	// 	}
+	// },
+
+	checkField: {
+		validRows() {
+			for (let i = 0; i < 9; i++) {
+				if (this.rows[i][c] === targer && i !== r) {
+					return false
+				}
+			}
+		},
+
+		validColums() {
+			for (let i = 0; i < 9; i++) {
+				if (this.rows[r][i] === targer && i !== c) {
+					return false
+				}
+			}
+		},
+
+		validBox() {
+			this.boxRow = Math.floor(r / 9) * 9;
+			this.boxCol = Math.floor(c / 9) * 9;
+
+			for (let i = 0; i < this.boxRow + 9; i++) {
+				for (let j = this.boxCol; j < this.boxCol + 9; j++) {
+					if (this.rows[i][j] === num && i !== r && j !== c) {
+						return false;
+					}
+				}
+			}
+		},
+	},
+
+	init() {
+		this.startBtn.addEventListener('click', this.getField.bind(this));
 
 	},
 
 	__proto__: view,
 }
 
-generation.getField();
+generation.init();
+view.init();
+
+
+
 
