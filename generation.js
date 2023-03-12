@@ -90,40 +90,48 @@ const generation = {
 	// 	}
 	// },
 
-	checkField: {
-		validRows() {
-			for (let i = 0; i < 9; i++) {
-				if (this.rows[i][c] === targer && i !== r) {
-					return false
-				}
-			}
-		},
+	// checkField: {
+	// 	validRows() {
+	// 		for (let i = 0; i < 9; i++) {
+	// 			if (this.rows[i][c] === targer && i !== r) {
+	// 				return false
+	// 			}
+	// 		}
+	// 	},
 
-		validColums() {
-			for (let i = 0; i < 9; i++) {
-				if (this.rows[r][i] === targer && i !== c) {
-					return false
-				}
-			}
-		},
+	// 	validColums() {
+	// 		for (let i = 0; i < 9; i++) {
+	// 			if (this.rows[r][i] === targer && i !== c) {
+	// 				return false
+	// 			}
+	// 		}
+	// 	},
 
-		validBox() {
-			this.boxRow = Math.floor(r / 9) * 9;
-			this.boxCol = Math.floor(c / 9) * 9;
+	// 	validBox() {
+	// 		this.boxRow = Math.floor(r / 9) * 9;
+	// 		this.boxCol = Math.floor(c / 9) * 9;
 
-			for (let i = 0; i < this.boxRow + 9; i++) {
-				for (let j = this.boxCol; j < this.boxCol + 9; j++) {
-					if (this.rows[i][j] === num && i !== r && j !== c) {
-						return false;
-					}
-				}
-			}
-		},
-	},
+	// 		for (let i = 0; i < this.boxRow + 9; i++) {
+	// 			for (let j = this.boxCol; j < this.boxCol + 9; j++) {
+	// 				if (this.rows[i][j] === num && i !== r && j !== c) {
+	// 					return false;
+	// 				}
+	// 			}
+	// 		}
+	// 	},
+	// },
+
+	// localStorage() {
+	// 	for (let i = 0; i < 9; i++) {
+	// 		for (let j = 0; j < 9; j++) {
+	// 			localStorage.setItem('cell', this.rows[i][j])
+	// 		}
+	// 	}
+	// },
 
 	init() {
 		this.startBtn.addEventListener('click', this.getField.bind(this));
-
+		// this.localStorage();
 	},
 
 	__proto__: view,
