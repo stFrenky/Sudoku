@@ -21,6 +21,8 @@ const view = {
 	changeValueField(event) {
 		if (event.target.classList.contains('btn')) {
 			this.selectedCell.textContent = event.target.textContent;
+			generation.findEmpty();
+			generation.validField();
 		}
 	},
 
@@ -69,69 +71,63 @@ const generation = {
 
 			if (i % 9 === 0) {
 				this.rows.push(this.row);
-				this.row === null;
+				this.row = null;
 			}
 		}
 
-		// this.findEmpty();
-		// console.log(this.currPos)
-
 	},
 
-	// findEmpty() {
-	// 	for (let r = 0; r < 9; r++) {
-	// 		for (let c = 0; c < 9; c++) {
-	// 			if (this.rows[r][c] === '') {
-	// 				return this.currPos = [r, c];
-	// 			}
+	findEmpty() {
+		for (let r = 0; r < 9; r++) {
+			for (let c = 0; c < 9; c++) {
+				if (this.rows[r][c].classList === 'action') {
+					this.currPos = [r, c];
+				}
 
-	// 			this.currPos = null;
-	// 		}
-	// 	}
-	// },
+				this.currPos = null;
+			}
+		}
+	},
 
-	// checkField: {
-	// 	validRows() {
-	// 		for (let i = 0; i < 9; i++) {
-	// 			if (this.rows[i][c] === targer && i !== r) {
-	// 				return false
-	// 			}
-	// 		}
-	// 	},
+	highlightField(a,b) {
+		this.rows[a][b].style.background = 'red';
+	},
 
-	// 	validColums() {
-	// 		for (let i = 0; i < 9; i++) {
-	// 			if (this.rows[r][i] === targer && i !== c) {
-	// 				return false
-	// 			}
-	// 		}
-	// 	},
+	validField() {
+		const [r,c] = this.currPos;
 
-	// 	validBox() {
-	// 		this.boxRow = Math.floor(r / 9) * 9;
-	// 		this.boxCol = Math.floor(c / 9) * 9;
+		//rows
+		for (let i = 0; i < 9; i++) {
+			if (this.rows[i][c] === this.rows[r][c] && i !== r) {
+				this.highlightField(i,c);
+				this.highlightField(r,c);
+			}
+		}
 
-	// 		for (let i = 0; i < this.boxRow + 9; i++) {
-	// 			for (let j = this.boxCol; j < this.boxCol + 9; j++) {
-	// 				if (this.rows[i][j] === num && i !== r && j !== c) {
-	// 					return false;
-	// 				}
-	// 			}
-	// 		}
-	// 	},
-	// },
+		//columns
+		for (let i = 0; i < 9; i++) {
+			if (this.rows[r][i] === this.rows[r][c] && i !== c) {
+				this.highlightField(r,i);
+				this.highlightField(r,c);
+			}
+		}
 
-	// localStorage() {
-	// 	for (let i = 0; i < 9; i++) {
-	// 		for (let j = 0; j < 9; j++) {
-	// 			localStorage.setItem('cell', this.rows[i][j])
-	// 		}
-	// 	}
-	// },
+		//box
+		this.boxRow = Math.floor(r / 9) * 9;
+		this.boxCol = Math.floor(c / 9) * 9;
+
+		for (let i = 0; i < this.boxRow + 9; i++) {
+			for (let j = this.boxCol; j < this.boxCol + 9; j++) {
+				if (this.rows[i][j] === this.rows[r][c] && i !== r && j !== c) {
+					this.highlightField(i,j);
+					this.highlightField(r,c);
+				}
+			}
+		}
+	},
 
 	init() {
 		this.startBtn.addEventListener('click', this.getField.bind(this));
-		// this.localStorage();
 	},
 
 	__proto__: view,
