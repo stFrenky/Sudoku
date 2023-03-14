@@ -1,1 +1,1 @@
-# Sudoku, using canvas + js
+# Sudoku
