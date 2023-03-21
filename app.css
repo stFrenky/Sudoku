@@ -96,6 +96,10 @@
 	background: #5877ec;
 }
 
+.cell.marked {
+	background-color: #de0000 !important;
+}
+
 .no-events {
 	pointer-events: none;
 }
