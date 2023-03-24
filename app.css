@@ -94,10 +94,13 @@
 
 .cell.active {
 	background: #5877ec;
+	color: chartreuse;
 }
 
 .cell.marked {
-	background-color: #de0000 !important;
+	outline: 3px solid red;
+	color: red;
+	z-index: 100;
 }
 
 .no-events {
